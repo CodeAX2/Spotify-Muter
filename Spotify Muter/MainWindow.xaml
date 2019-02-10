@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify_Muter"
         mc:Ignorable="d"
+        Closing="WindowClosing"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="DimGray">
         <Grid.ColumnDefinitions>

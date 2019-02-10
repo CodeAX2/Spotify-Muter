@@ -43,13 +43,17 @@ namespace Spotify_Muter {
 
 		private string prevArtist = "";
 
+		// Gets called every frame
 		private void loop(object sender, EventArgs e) {
+
+			// Obtain information about the track
 			string trackInfo = GetSpotifyTrackInfo();
 
 			if (trackInfo == "Spotify is not running!" || trackInfo == "Paused") {
 				return;
 			}
 
+			// Extract the artist and track name
 			string artist = "";
 			string trackName = "";
 			for (int i = 0; i < trackInfo.Length; i++) {
@@ -67,10 +71,12 @@ namespace Spotify_Muter {
 			}
 
 
+			// If no data was extracted, put it all into artist
 			if (artist == "") {
 				artist = trackInfo;
 			}
 
+			// Update labels and call artist changed
 			songLbl.Content = trackName;
 			artistLbl.Content = artist;
 
@@ -82,18 +88,22 @@ namespace Spotify_Muter {
 
 		}
 
+		// Run whenever the artist listening to changes
 		private void artistChange(string newArtist, string prevArtist) {
 
 			if (newArtist.Equals("Spotify") || newArtist.Equals("Advertisement")) {
-
+				// If the artist is Spotify or Advertisement
 				var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 				if (proc != null) {
+					// Mute spotify
 					AudioManager.SetApplicationMute(proc.Id, true);
 				}
 
 			} else {
+				// Not an ad
 				var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 				if (proc != null) {
+					// Unmute Spotify
 					AudioManager.SetApplicationMute(proc.Id, false);
 				}
 			}
@@ -101,13 +111,23 @@ namespace Spotify_Muter {
 
 
 		private string GetSpotifyTrackInfo() {
-			var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 
+			var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
+			// Check that spotify is open
 			if (proc == null) {
 				return "Spotify is not running!";
 			}
 
+			// The main title contains info about the current track, or ad info
 			return proc.MainWindowTitle;
+		}
+
+		public void WindowClosing(object sender, EventArgs e) {
+			// Unmute spotify when we close
+			var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
+			if (proc != null) {
+				AudioManager.SetApplicationMute(proc.Id, false);
+			}
 		}
 
 
