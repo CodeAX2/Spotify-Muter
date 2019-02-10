@@ -11,11 +11,11 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="95*"/>
         </Grid.ColumnDefinitions>
-        <Label Name="Artist" Content="Artist" HorizontalAlignment="Center" Margin="106,245,118,0" VerticalAlignment="Top" Height="136" Width="536" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"/>
+        <Label Name="Artist" Content="Artist" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="136" Width="792" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
         <Label Name="Song" Content="Song Text Goes Here It Might Be Long" HorizontalAlignment="Center" Margin="0,201,0,0" VerticalAlignment="Top" Height="136" Width="792" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
         <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="100" Margin="316.187,77,0,0" VerticalAlignment="Top" Width="100" Source="Images/spotify-logo.png" Grid.Column="1"/>
-        <Label Content="Spotify Ad-Silencer" Height="98" Margin="174.187,10,199,0" VerticalAlignment="Top" Width="387" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" Grid.Column="1"/>
-        <Label Content="Currently Playing:" HorizontalAlignment="Left" Height="120" Margin="238,201,0,0" VerticalAlignment="Top" Width="268" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
-        <Label Content="Created By: Jacob Hofer" Margin="188.187,357,218,0" VerticalAlignment="Top" FontSize="25" FontWeight="ExtraBold" HorizontalContentAlignment="Center" Grid.Column="1"/>
+        <Label Content="Spotify Ad-Silencer" Height="98" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label Content="Currently Playing:" HorizontalAlignment="Left" Height="120" Margin="0,201,0,0" VerticalAlignment="Top" Width="792" FontSize="30" FontWeight="Bold" Grid.ColumnSpan="2" HorizontalContentAlignment="Center"/>
+        <Label Content="Created By: Jacob Hofer" Margin="0,357,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="ExtraBold" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
