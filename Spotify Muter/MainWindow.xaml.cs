@@ -32,7 +32,7 @@ namespace Spotify_Muter {
 
 			InitializeComponent();
 			Title = "Spotify Muter";
-			ResizeMode = ResizeMode.NoResize;
+			ResizeMode = ResizeMode.CanMinimize;
 
 			// Get the label
 			songLbl = (Label)this.FindName("Song");
