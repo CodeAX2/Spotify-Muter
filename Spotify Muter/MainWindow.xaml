@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:Spotify_Muter"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="DimGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="95*"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="Artist" Content="Artist" HorizontalAlignment="Center" Margin="106.187,226,118,0" VerticalAlignment="Top" Height="136" Width="536" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"/>
+        <Label Name="Song" Content="Song Text Goes Here It Might Be Long" HorizontalAlignment="Center" Margin="106.187,182,118,0" VerticalAlignment="Top" Height="136" Width="536" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"/>
+        <Image RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="100" Margin="316.187,77,0,0" VerticalAlignment="Top" Width="100" Source="Images/spotify-logo.png" Grid.Column="1"/>
+        <Label Content="Spotify Ad-Silencer" Height="98" Margin="174.187,10,199,0" VerticalAlignment="Top" Width="387" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" Grid.Column="1"/>
+        <Label Content="Currently Playing:" HorizontalAlignment="Left" Height="120" Margin="238.187,182,0,0" VerticalAlignment="Top" Width="268" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
+        <Label Content="Created By: Jacob Hofer" Margin="188.187,357,218,0" VerticalAlignment="Top" FontSize="25" FontWeight="ExtraBold" HorizontalContentAlignment="Center" Grid.Column="1"/>
     </Grid>
 </Window>
