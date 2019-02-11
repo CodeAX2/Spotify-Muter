@@ -27,6 +27,7 @@ namespace Spotify_Muter {
 	public partial class MainWindow : Window {
 
 		private Label songLbl, artistLbl;
+		private List<string> artistBlacklist;
 
 		public MainWindow() {
 
@@ -37,11 +38,19 @@ namespace Spotify_Muter {
 			// Get the label
 			songLbl = (Label)this.FindName("Song");
 			artistLbl = (Label)this.FindName("Artist");
+			try {
+				artistBlacklist = System.IO.File.ReadAllLines("blacklist.txt").ToList();
+			} catch (Exception e) {
+				// File is corrupt, does not exist, etc.
+				System.IO.File.Create("blacklist.txt");
+				artistBlacklist = new List<string>();
+			}
 
 			CompositionTarget.Rendering += loop;
 		}
 
 		private string prevArtist = "";
+		private string currentArtist = "";
 
 		// Gets called every frame
 		private void loop(object sender, EventArgs e) {
@@ -76,6 +85,8 @@ namespace Spotify_Muter {
 				artist = "Advertisement";
 			}
 
+			currentArtist = artist;
+
 			// Update labels and call artist changed
 			songLbl.Content = trackName;
 			artistLbl.Content = artist;
@@ -91,7 +102,7 @@ namespace Spotify_Muter {
 		// Run whenever the artist listening to changes
 		private void artistChange(string newArtist, string prevArtist) {
 
-			if (newArtist.Equals("Spotify") || newArtist.Equals("Advertisement")) {
+			if (newArtist.Equals("Spotify") || newArtist.Equals("Advertisement") || artistBlacklist.Contains(newArtist)) {
 				// If the artist is Spotify or Advertisement
 				var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 				if (proc != null) {
@@ -122,12 +133,29 @@ namespace Spotify_Muter {
 			return proc.MainWindowTitle;
 		}
 
+		private void RegisterAd(object sender, RoutedEventArgs e) {
+			if (!artistBlacklist.Contains(currentArtist)) {
+				artistBlacklist.Add(currentArtist);
+			}
+		}
+
 		public void WindowClosing(object sender, EventArgs e) {
 			// Unmute spotify when we close
 			var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 			if (proc != null) {
 				AudioManager.SetApplicationMute(proc.Id, false);
 			}
+
+			try {
+				System.IO.File.WriteAllLines("blacklist.txt", artistBlacklist.ToArray());
+			} catch (Exception ex) {
+				System.IO.File.Create("blacklist.txt");
+			} finally {
+				System.IO.File.WriteAllLines("blacklist.txt", artistBlacklist.ToArray());
+			}
+
+
+
 		}
 
 
