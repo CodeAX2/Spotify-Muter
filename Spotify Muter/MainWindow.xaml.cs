@@ -136,6 +136,7 @@ namespace Spotify_Muter {
 		private void RegisterAd(object sender, RoutedEventArgs e) {
 			if (!artistBlacklist.Contains(currentArtist)) {
 				artistBlacklist.Add(currentArtist);
+				artistChange(currentArtist, prevArtist);
 			}
 		}
 
