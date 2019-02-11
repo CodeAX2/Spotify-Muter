@@ -71,9 +71,9 @@ namespace Spotify_Muter {
 			}
 
 
-			// If no data was extracted, put it all into artist
+			// If no data was extracted, that means its an ad
 			if (artist == "") {
-				artist = trackInfo;
+				artist = "Advertisement";
 			}
 
 			// Update labels and call artist changed
