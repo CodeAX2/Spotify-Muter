@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Spotify_Muter"
         mc:Ignorable="d"
         Closing="WindowClosing"
+        Icon="mutericon.ico"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#1a1a1a">
         <Grid.RowDefinitions>
