@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify_Muter"
         mc:Ignorable="d"
-        Closing="WindowClosing"
+        Closing="windowClosing"
         Icon="mutericon.ico"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#1a1a1a">
@@ -24,6 +24,6 @@
         <Label Content="Spotify Ad-Silencer" Height="54" Margin="240,36,150,0" VerticalAlignment="Top" FontSize="40" FontFamily="Impact" HorizontalContentAlignment="Center" Grid.Column="1" Grid.RowSpan="2" Foreground="#1DB954"/>
         <Label Content="Currently Playing:" HorizontalAlignment="Left" Height="120" Margin="0,201,0,0" VerticalAlignment="Top" Width="792" FontSize="30" FontWeight="Bold" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Grid.RowSpan="3" Foreground="#ffffff"/>
         <Label Content="Created By: Jacob Hofer" Margin="0,144.504,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="ExtraBold" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2" Foreground="#ffffff"/>
-        <Button Content="      Register Current &#xa;Song as Advertisement" Grid.Column="1" Margin="255,117,278,0" HorizontalContentAlignment="Center" FontSize="15" Grid.RowSpan="2" Height="65" VerticalAlignment="Top" Click="RegisterAd"  Background="#1a1a1a" BorderThickness="5" Foreground="White" BorderBrush="White" Style="{DynamicResource ButtonStyle1}"/>
+        <Button Content="      Register Current &#xa;Song as Advertisement" Grid.Column="1" Margin="255,117,278,0" HorizontalContentAlignment="Center" FontSize="15" Grid.RowSpan="2" Height="65" VerticalAlignment="Top" Click="registerAd"  Background="#1a1a1a" BorderThickness="5" Foreground="White" BorderBrush="White" Style="{DynamicResource ButtonStyle1}"/>
     </Grid>
 </Window>

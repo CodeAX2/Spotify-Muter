@@ -50,6 +50,13 @@ namespace Spotify_Muter {
 				artistBlacklist = new List<string>();
 			}
 
+			// Remove empty artists from the blacklist
+			for (int i = artistBlacklist.Count - 1; i >= 0; i--) {
+				if (artistBlacklist[i] == "") {
+					artistBlacklist.RemoveAt(i);
+				}
+			}
+
 			CompositionTarget.Rendering += loop;
 
 		}
@@ -62,7 +69,7 @@ namespace Spotify_Muter {
 		private void loop(object sender, EventArgs e) {
 
 			// Obtain information about the track
-			string trackInfo = GetSpotifyTrackInfo();
+			string trackInfo = getSpotifyTrackInfo();
 
 			if (trackInfo == "Spotify is not running!" || trackInfo == "Paused") {
 				return;
@@ -149,7 +156,7 @@ namespace Spotify_Muter {
 		}
 
 
-		private string GetSpotifyTrackInfo() {
+		private string getSpotifyTrackInfo() {
 
 			var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 			// Check that spotify is open
@@ -161,8 +168,8 @@ namespace Spotify_Muter {
 			return proc.MainWindowTitle;
 		}
 
-		private void RegisterAd(object sender, RoutedEventArgs e) {
-			if (!artistBlacklist.Contains(currentArtist)) {
+		private void registerAd(object sender, RoutedEventArgs e) {
+			if (!artistBlacklist.Contains(currentArtist) && currentArtist != "") {
 				artistBlacklist.Add(currentArtist);
 				infoChange(currentArtist, prevArtist, "", "");
 			}
@@ -186,7 +193,7 @@ namespace Spotify_Muter {
 
 		}
 
-		public void WindowClosing(object sender, EventArgs e) {
+		public void windowClosing(object sender, EventArgs e) {
 			// Unmute spotify when we close
 			var proc = Process.GetProcessesByName("Spotify").FirstOrDefault(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle));
 			if (proc != null) {
