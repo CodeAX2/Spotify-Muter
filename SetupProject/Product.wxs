@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" UpgradeCode="D5E801CB-C25C-4104-82AD-6DACE3988AA2"
+           Name="Spotify Muter" Version="1.0.0.0" Manufacturer="Jacob Hofer" Language="1033">
+    <Package InstallerVersion="200" Compressed="yes" Comments="Windows Installer Package"/>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes"/>
+
+    <Feature Id="ProductFeature" Title="DesktopToastsSetupProject" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <Icon Id="ProductIcon" SourceFile="mutericon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Spotify Muter" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+      </Directory>
+    </Directory>
+  </Fragment>
+
+
+  <Fragment>
+    <DirectoryRef Id="ProgramMenuFolder">
+      <Component Id="ApplicationShortcut" Guid="2B39F662-93C9-4D8F-BD59-A0624AECFCA6">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="Spotify Muter" Description="Mutes Spotify Ads" Target="[INSTALLFOLDER]SpotifyMuter.exe" WorkingDirectory="INSTALLFOLDER">
+
+          <!--AUMID-->
+          <ShortcutProperty Key="System.AppUserModel.ID" Value="JacobHofer.SpotifyMuter"/>
+
+          <!--COM CLSID-->
+          <ShortcutProperty Key="System.AppUserModel.ToastActivatorCLSID" Value="{9A08AE3E-99EF-4AC6-B764-38FCF6BB68A0}"/>
+
+        </Shortcut>
+
+        <RemoveFolder Id="INSTALLFOLDER" On="uninstall"/>
+        <RemoveFile Id="RemoveApplicationShortcut" Directory="ProgramMenuFolder" Name="Spotify Muter" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\SpotifyMuter" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="SpotifyMuter.exe" Guid="D6DCEB3A-29F9-4745-9D70-F00D3F8D5137">
+        <File Id="SpotifyMuter.exe" Name="SpotifyMuter.exe" Source="Spotify Muter.exe"/>
+      </Component>
+
+      <!--Tell WiX to install the shortcut-->
+      <ComponentRef Id="ApplicationShortcut"/>
+    </ComponentGroup>
+  </Fragment>
+
+
+</Wix>

@@ -20,6 +20,9 @@ using System.IO;
 
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using DesktopNotifications;
+using System.Configuration;
+using System.Data;
 
 
 
@@ -183,13 +186,10 @@ namespace Spotify_Muter {
 			XmlElement audio = toastXml.CreateElement("audio");
 			audio.SetAttribute("silent", "true");
 
-			Console.WriteLine(toastXml.GetXml());
-
 			ToastNotification toast = new ToastNotification(toastXml);
 
-			ToastNotificationManager.CreateToastNotifier("SpotifyMuter").Show(toast);
-
-
+			ToastNotifier tn = ToastNotificationManager.CreateToastNotifier("JacobHofer.SpotifyMuter");
+			tn.Show(toast);
 
 		}
 
@@ -213,5 +213,14 @@ namespace Spotify_Muter {
 		}
 
 
+	}
+
+	[ClassInterface(ClassInterfaceType.None)]
+	[ComSourceInterfaces(typeof(INotificationActivationCallback))]
+	[Guid("9A08AE3E-99EF-4AC6-B764-38FCF6BB68A0"), ComVisible(true)]
+	public class MyNotificationActivator : NotificationActivator {
+		public override void OnActivated(string invokedArgs, NotificationUserInput userInput, string appUserModelId) {
+		
+		}
 	}
 }
